@@ -1,37 +1,399 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo | 前端工程師與教育者 - 個人品牌網站</title>
+  <meta name="description" content="這是 Leo 的個人網站，分享我作為前端工程師的經驗、熱愛的開發技術、教學心得與實戰作品集。這裡是我展示技能與聯絡交流的平台空間。">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; max-width: 100%; }
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", Arial, sans-serif; line-height: 1.6; }
-    img { max-width: 100%; height: auto; display: block; }
-    .container { width: 1920px; margin: 0 auto; padding: 16px; }
-    nav a { margin-right: 12px; text-decoration: none; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .col-12 { grid-column: span 12; }
-    @media (min-width: 768px) { .col-md-6 { grid-column: span 6; } }
-    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    /* CSS:BASE-START */
+    :root {
+      --bg-color: #0f172a;
+      --text-color: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-color: #06b6d4;
+      --accent-hover: #22d3ee;
+      --card-bg: #1e293b;
+      --container-px: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--container-px);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--accent-color);
+      text-align: center;
+    }
+
+    button, .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-color);
+    }
+    /* CSS:BASE-END */
+
+    /* CSS:HERO-START */
+    .section-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    /* CSS:HERO-END */
+
+    /* CSS:ABOUT-START */
+    .section-about .about-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .section-about .about-content {
+      flex: 1;
+    }
+
+    .section-about .about-text {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .section-about .strength-list {
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .section-about .strength-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .section-about .strength-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .section-about .about-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 2rem;
+    }
+
+    .section-about .about-image-box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .section-about .about-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      object-fit: cover;
+      box-shadow: 10px 10px 0px var(--accent-color);
+    }
+    /* CSS:ABOUT-END */
+
+    /* CSS:SKILLS-START */
+    .section-skills {
+      background-color: var(--card-bg);
+    }
+    .skill-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+    }
+    /* CSS:SKILLS-END */
+
+    /* CSS:PROJECTS-START */
+    .section-projects {
+      text-align: center;
+    }
+    .project-grid {
+      display: grid;
+      gap: 20px;
+    }
+    /* CSS:PROJECTS-END */
+
+    /* CSS:CONTACT-START */
+    .section-contact {
+      background-color: var(--card-bg);
+      text-align: center;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .contact-link {
+      padding: 10px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      width: 100%;
+      max-width: 300px;
+    }
+    /* CSS:CONTACT-END */
+
+    /* CSS:RWD-START */
+    @media (min-width: 768px) {
+      .section-about .about-wrapper {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+      }
+      .section-about .section-title {
+        text-align: left;
+      }
+      .nav-logo {
+        font-size: 1.75rem;
+      }
+      .hero-title {
+        font-size: 4rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .nav-list {
+        display: none; /* 骨架階段暫時隱藏手機導覽，或採用簡單排列 */
+      }
+      .section-about .about-image-box {
+        order: 2;
+      }
+    }
+    /* CSS:RWD-END */
   </style>
 </head>
 <body>
-  <header class="container" role="banner">
-    <nav aria-label="主選單">
-      <a href="#about">關於我</a>
-      <a href="#projects">作品集</a>
-      <a href="https://example.com/blog">技術部落格</a>
-      <a href="mailto:me@example.com">聯絡我</a>
-    </nav>
-    <h1>你好，我是小明：前端工程師新手之路</h1>
-    <h1>你好，我是小明：前端工程師新手之路</h1>
-    <p>歡迎來到我的個人網站！這裡整理了學習紀錄、Side Project 與實作心得。</p>
-  </header>
+  <div class="page">
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">LEO · FRONTEND</div>
+          <ul class="nav-list">
+            <li><a href="#hero" class="nav-link">首頁</a></li>
+            <li><a href="#about" class="nav-link">關於我</a></li>
+            <li><a href="#skills" class="nav-link">技能</a></li>
+            <li><a href="#projects" class="nav-link">作品集</a></li>
+            <li><a href="#contact" class="nav-link">聯絡我</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <footer class="container" role="contentinfo">
-    <p>© 2025 My Portfolio · <a href="#">GitHub</a></p>
-    <img src="https://source.unsplash.com/600x200/?technology,abstract" alt="">
-  </footer>
+    <main>
+      <!-- SECTION:HERO-START -->
+      <section id="hero" class="section section-hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1 class="hero-title">專注於創造極致體驗的<br><span style="color:var(--accent-color)">前端工程師</span></h1>
+            <p class="hero-subtitle">這是我展示技能與作品的空間，目前此處為全站唯一的 H1 標題。之後會用 Section SDD 的 Prompt 產生正式文案與版面，再把整個 section 貼回來取代這一區。</p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn">瀏覽作品集</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:HERO-END -->
+
+      <!-- SECTION:ABOUT-START -->
+      <section id="about" class="section section-about" aria-labelledby="about-heading">
+        <div class="container">
+          <div class="about-wrapper">
+            <div class="about-content">
+              <h2 id="about-heading" class="section-title">關於我</h2>
+              <p class="about-text">
+                我是一位熱衷於前端技術的開發者與教育工作者。目前專注於網頁前端開發、技術教學以及接案工作。我擅長利用 HTML、CSS 與 JavaScript 打造高效且美觀的網站，並致力於讓程式碼更具維護性。
+              </p>
+              <p class="about-text">
+                在多年的開發與教學經驗中，我養成了重視溝通與邏輯清晰的做事風格。我喜歡將複雜的技術知識轉化為易於理解的語言，並確保每一個細節都能對標實際需求，讓合作過程透明且愉快。
+              </p>
+              <ul class="strength-list">
+                <li class="strength-item">高效的響應式網頁設計 (RWD) 實作</li>
+                <li class="strength-item">結構化且具備 SEO 優化的 HTML/CSS 寫法</li>
+                <li class="strength-item">能夠將複雜概念清晰化，協助開發團隊或學生成長</li>
+              </ul>
+              <div class="about-actions">
+                <a href="#projects" class="btn">查看作品集</a>
+                <a href="#contact" class="btn btn-outline">聯絡我</a>
+              </div>
+            </div>
+            <div class="about-image-box">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="正在筆電前專注撰寫程式碼的前端工程師" class="about-image" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:ABOUT-END -->
+
+      <!-- SECTION:SKILLS-START -->
+      <section id="skills" class="section section-skills" aria-labelledby="skills-heading">
+        <div class="container">
+          <h2 id="skills-heading" class="section-title">核心技能（占位內容）</h2>
+          <div class="skill-placeholder">
+            <p>這裡目前是 Skills 區的占位內容。之後會用 Section SDD 產生更詳細的技能說明與視覺呈現（例如圖示或進度條）。</p>
+            <p>請開發者之後將新的 section 程式碼整段貼在兩個註解中間，完全取代現在這一區。</p>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:SKILLS-END -->
+
+      <!-- SECTION:PROJECTS-START -->
+      <section id="projects" class="section section-projects" aria-labelledby="projects-heading">
+        <div class="container">
+          <h2 id="projects-heading" class="section-title">精選作品（占位內容）</h2>
+          <div class="skill-placeholder">
+            <p>這裡目前是 Projects 區的占位內容。未來會用第二階段的 Prompt 產生作品卡片清單。</p>
+            <p>請把新的 section 程式碼整段貼在這兩個註解中間，完全取代現在這一區。</p>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:PROJECTS-END -->
+
+      <!-- SECTION:CONTACT-START -->
+      <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
+        <div class="container">
+          <h2 id="contact-heading" class="section-title">與我聯絡</h2>
+          <div class="contact-info">
+            <p>這裡目前是聯絡資訊的占位內容。您可以透過以下方式聯繫我：</p>
+            <a href="mailto:hello@example.com" class="contact-link">📧 hello@example.com</a>
+            <a href="tel:+886912345678" class="contact-link">📞 +886-912-345-678</a>
+            <a href="https://github.com/leodev" class="contact-link" target="_blank">🔗 GitHub Profile</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:CONTACT-END -->
+    </main>
+
+    <footer style="padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem;">
+      <div class="container">
+        <p>&copy; 2026 LEO · FRONTEND. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
